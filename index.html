@@ -99,7 +99,7 @@
                         <p>Edit first-preference counts to redraw the field.</p>
                     </header>
                     <p class="presets-label"><span class="ornament">☞</span> Load a field, by Monty's hand, or adjust
-                        the numbers below by your own</p>
+                        the numbers below manually.</p>
                     <div class="presets" role="group" aria-label="Applicant data presets">
                         <button type="button" class="preset" onclick="applyPreset('historical')">
                             <span class="preset-name">Historical <span class="preset-year">· 2026</span></span>
@@ -143,7 +143,8 @@
                 <header class="part-head">
                     <span class="part-label">Part III</span>
                     <h3>Cast the lots</h3>
-                    <p>When the order is set and the field looks right, ask Monty to draw the ballot fifty thousand times.</p>
+                    <p>When the order is set and the field looks right, ask Monty to draw the ballot fifty thousand
+                        times.</p>
                 </header>
                 <div class="cast-card">
                     <span class="cast-flourish" aria-hidden="true">⁂</span>
@@ -154,9 +155,11 @@
                     <p class="cast-sub">Monty draws the ballot fifty thousand times. Takes a moment.</p>
                     <p id="status-text" class="status">Monty waits at the table. The deck is set.</p>
                     <div class="cast-secondary">
-                        <button id="share-btn" class="btn-text" type="button" onclick="copyShareLink()">Copy share link</button>
+                        <button id="share-btn" class="btn-text" type="button" onclick="copyShareLink()">Copy share
+                            link</button>
                         <span class="cast-sep" aria-hidden="true">·</span>
-                        <button id="reset-btn" class="btn-text" type="button" onclick="resetToDefaults()">Restore defaults</button>
+                        <button id="reset-btn" class="btn-text" type="button" onclick="resetToDefaults()">Restore
+                            defaults</button>
                     </div>
                 </div>
             </section>
@@ -195,15 +198,21 @@
                 <article class="note-col">
                     <h4>About this page</h4>
                     <p>
-                        I built this to make the ballot feel legible. It shows how the system works and why outcomes can be
-                        unintuitive: you can do everything right and still land your 11th preference. That is bad luck, but it
+                        I built this to make the ballot feel legible. It shows how the system works and why outcomes can
+                        be
+                        unintuitive: you can do everything right and still land your 11th preference. That is bad luck,
+                        but it
                         is part of the machinery.
                     </p>
                     <p>
-                        It also makes the strategy clear. Either pick an undersubscribed hospital as your first choice to
-                        guarantee the posting, or list your true preferences in strict order from most wanted to least wanted.
-                        Monty is a Monte Carlo simulation underneath the theatre: place everyone at first preference, reassign
-                        those bumped from oversubscribed hospitals, weight the bumps by the wider field's taste, and repeat
+                        It also makes the strategy clear. Either pick an undersubscribed hospital as your first choice
+                        to
+                        guarantee the posting, or list your true preferences in strict order from most wanted to least
+                        wanted.
+                        Monty is a Monte Carlo simulation underneath the theatre: place everyone at first preference,
+                        reassign
+                        those bumped from oversubscribed hospitals, weight the bumps by the wider field's taste, and
+                        repeat
                         fifty thousand times.
                     </p>
                 </article>

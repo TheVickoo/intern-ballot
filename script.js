@@ -168,13 +168,13 @@ const LIVE_STATUS_REPORT = {
     "Caboolture": 1,
     "Cairns": 12,
     "Gold Coast": 15,
-    "Greenslopes Private Hospital": 0,
+    "Greenslopes Private Hospital": 0, // Private facility; not in the public intern ballot list.
     "Hervey Bay": 0,
     "Ipswich": 1,
     "Logan": 5,
     "Mackay": 1,
     "Mater": 6,
-    "Mt Isa Hospital": 1,
+    "Mt Isa Hospital": 1, // Capacity is 0, so it is not included in the simulation.
     "PA Hospital": 4,
     "QEII": 4,
     "Redcliffe": 1,
