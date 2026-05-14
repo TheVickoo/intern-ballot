@@ -1,0 +1,27 @@
+{
+  "name": "Agent Sandbox",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "workspaceFolder": "/home/node/workspace",
+  "remoteUser": "node",
+
+  "mounts": [
+    // Local workspace
+    "source=${localWorkspaceFolder},target=/home/node/workspace,type=bind,consistency=cached",
+    
+    // Isolated Agent Data Volumes
+    "source=agent-sandbox-opencode-config,target=/home/node/.config/opencode,type=volume",
+    "source=agent-sandbox-opencode-data,target=/home/node/.local/share/opencode,type=volume"
+  ],
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "editor.formatOnSave": true
+      }
+    }
+  }
+}

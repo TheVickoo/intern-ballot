@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Readymedygo Almanac · Probable Postings for the 2027 QLD Intern Ballot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="paper">
+        <header class="masthead">
+            <div class="masthead-row">
+                <span class="folio folio-left">Vol. I · № 1</span>
+                <h1 class="wordmark">The Readymedygo Almanac</h1>
+                <span class="folio folio-right">2027 · QLD Intake</span>
+            </div>
+            <div class="rule rule-double"></div>
+            <p class="masthead-meta">
+                <span>A Monte Carlo concordance</span>
+                <span class="ornament">⁂</span>
+                <span>Fifty thousand simulated ballots</span>
+                <span class="ornament">⁂</span>
+                <span>Compiled for Searle &amp; Keir</span>
+            </p>
+            <div class="byline">
+                <svg class="byline-seal" viewBox="0 0 80 80" aria-hidden="true">
+                    <circle cx="40" cy="40" r="36" fill="none" stroke="currentColor" stroke-width="1.5" />
+                    <circle cx="40" cy="40" r="31" fill="none" stroke="currentColor" stroke-width="0.6" />
+                    <text x="40" y="20" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="6"
+                        letter-spacing="1.4" fill="currentColor">THE · GREAT · MONTY</text>
+                    <text x="40" y="54" text-anchor="middle" font-family="Fraunces, serif" font-style="italic"
+                        font-size="30" font-weight="500" fill="currentColor">M</text>
+                    <text x="40" y="68" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="5"
+                        letter-spacing="1" fill="currentColor">⁂ SOOTHSAYER ⁂</text>
+                </svg>
+                <div class="byline-text">
+                    <span class="byline-pointer">☞</span>
+                    <span class="byline-line-1">A page set down by</span>
+                    <span class="byline-line-2">The Great Monty</span>
+                    <span class="byline-line-3"><em>soothsayer, statistician, friend to the bewildered
+                            intern-to-be</em></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="hero">
+            <p class="hero-eyebrow">A reading of the lot, in three parts</p>
+            <h2 class="hero-title">
+                Where Will You<br>
+                <em>Be</em> Next Year?
+            </h2>
+            <figure class="monty-epigraph">
+                <blockquote>
+                    <p>“Tell Monty your desires. He will gaze into the future and tell you where you might end up for
+                        internship next year, to one decimal place.”</p>
+                </blockquote>
+                <figcaption>— The Great Monty, <em>Vol. I</em></figcaption>
+            </figure>
+            <div class="hero-controls">
+                <div class="mode-switch" role="radiogroup" aria-label="Application mode">
+                    <button type="button" class="mode-option" data-mode="joint" role="radio" aria-checked="false">
+                        <span class="dot"></span>
+                        <span class="mode-text">Joint <em>two applicants</em></span>
+                    </button>
+                    <button type="button" class="mode-option is-active" data-mode="solo" role="radio"
+                        aria-checked="true">
+                        <span class="dot"></span>
+                        <span class="mode-text">Solo <em>single applicant</em></span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <main class="main">
+            <div class="two-col">
+                <section class="part part-prefs">
+                    <header class="part-head">
+                        <span class="part-label">Part I</span>
+                        <h3>Your rank order</h3>
+                        <p>Drag to reorder, or use the arrows. Rank one is your top choice.</p>
+                    </header>
+                    <div id="preference-list" class="sortable-list">
+                        <p aria-busy="true" class="loading">Setting the type…</p>
+                    </div>
+                </section>
+
+                <section class="part part-data">
+                    <header class="part-head">
+                        <span class="part-label">Part II</span>
+                        <h3>The field of applicants</h3>
+                        <p>Edit first-preference counts to redraw the field.</p>
+                    </header>
+                    <p class="presets-label"><span class="ornament">☞</span> Load a field, by Monty's hand, or adjust
+                        the numbers below by your own</p>
+                    <div class="presets" role="group" aria-label="Applicant data presets">
+                        <button type="button" class="preset" onclick="applyPreset('historical')">
+                            <span class="preset-name">Historical <span class="preset-year">· 2026</span></span>
+                            <span class="preset-desc">Last year's first-preference counts. The baseline; the closest
+                                thing to a complete field.</span>
+                            <span class="preset-cta">Load this field <span class="arrow"
+                                    aria-hidden="true">→</span></span>
+                        </button>
+                        <button type="button" class="preset" onclick="applyPreset('live')">
+                            <span class="preset-name">Live status</span>
+                            <span class="preset-desc">Self-reported preferences from this year's cohort. Always
+                                under-reported. Useful as a floor.</span>
+                            <span class="preset-cta">Load this field <span class="arrow"
+                                    aria-hidden="true">→</span></span>
+                        </button>
+                        <button type="button" class="preset" onclick="applyPreset('extrapolate')">
+                            <span class="preset-name">Extrapolated</span>
+                            <span class="preset-desc">Live numbers scaled to last year's total. Monty's best guess of
+                                the full field.</span>
+                            <span class="preset-cta">Load this field <span class="arrow"
+                                    aria-hidden="true">→</span></span>
+                        </button>
+                    </div>
+                    <div class="ledger">
+                        <table id="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Hospital</th>
+                                    <th class="num">Cap.</th>
+                                    <th class="num">Applicants</th>
+                                    <th class="num">Ratio</th>
+                                </tr>
+                            </thead>
+                            <tbody id="data-body"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <section class="part part-cast" aria-label="Cast the simulation">
+                <header class="part-head">
+                    <span class="part-label">Part III</span>
+                    <h3>Cast the lots</h3>
+                    <p>When the order is set and the field looks right, ask Monty to draw the ballot fifty thousand times.</p>
+                </header>
+                <div class="cast-card">
+                    <span class="cast-flourish" aria-hidden="true">⁂</span>
+                    <button id="run-btn" class="btn btn-cast" type="button">
+                        <span class="btn-cast-verb">Cast the lots</span>
+                        <span class="btn-cast-arrow" aria-hidden="true">↬</span>
+                    </button>
+                    <p class="cast-sub">Monty draws the ballot fifty thousand times. Takes a moment.</p>
+                    <p id="status-text" class="status">Monty waits at the table. The deck is set.</p>
+                    <div class="cast-secondary">
+                        <button id="share-btn" class="btn-text" type="button" onclick="copyShareLink()">Copy share link</button>
+                        <span class="cast-sep" aria-hidden="true">·</span>
+                        <button id="reset-btn" class="btn-text" type="button" onclick="resetToDefaults()">Restore defaults</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="results" class="part results" style="display:none;">
+                <header class="part-head">
+                    <span class="part-label">The reading</span>
+                    <h3>How the lots fell.</h3>
+                    <p>The probability of each posting, drawn from fifty thousand simulated ballots.</p>
+                </header>
+                <div id="results-summary" class="stat-row"></div>
+                <div class="ledger">
+                    <table id="results-table">
+                        <thead>
+                            <tr>
+                                <th class="num">№</th>
+                                <th>Hospital</th>
+                                <th>Distribution</th>
+                                <th class="num">P(here)</th>
+                                <th class="num">Cumulative</th>
+                            </tr>
+                        </thead>
+                        <tbody id="results-body"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <section class="readers-note" aria-labelledby="readers-note-heading">
+            <header class="part-head">
+                <span class="part-label">A reader's note</span>
+                <h3 id="readers-note-heading">On the method, its limits, and where to read further.</h3>
+                <p>Three short essays for anyone consulting the almanac.</p>
+            </header>
+            <div class="note-cols">
+                <article class="note-col">
+                    <h4>About this page</h4>
+                    <p>
+                        Monty reads the ballot the way other men read tea leaves. Beneath the theatre he is a Monte Carlo simulation: place every applicant at their first preference, reassign those bumped from oversubscribed hospitals, weight the bumps by the wider field's taste, and repeat fifty thousand times.
+                    </p>
+                    <p>
+                        Your probability of landing at a hospital is the share of those trials in which you do. Joint mode draws you and your partner as a pair; solo mode draws you alone.
+                    </p>
+                </article>
+                <article class="note-col">
+                    <h4>Disclaimer</h4>
+                    <p>
+                        These figures are not predictions. They are conditional probabilities under a simplified model
+                        of the ballot. The real allocation rules include factors this simulator does not fully
+                        represent: special circumstances, rural training pathways, bonded positions, and the precise
+                        displacement order. Treat the numbers as a feel for the shape of the odds, not a forecast.
+                    </p>
+                    <p class="muted-note">
+                        Past ballots are an imperfect guide to future ones. The lot, when cast in earnest, may fall
+                        otherwise.
+                    </p>
+                </article>
+                <article class="note-col">
+                    <h4>Further reading</h4>
+                    <p>
+                        For the authoritative process, consult the current <em>Queensland Health Junior Doctor
+                            Recruitment</em> guide and the Medical Intern Campaign documentation. They set out
+                        eligibility, joint application rules, the special-circumstances pathway, and the official order
+                        of allocation.
+                    </p>
+                    <p>
+                        Always defer to the current guide over anything you read here.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="appendix" aria-labelledby="appendix-heading">
+            <header class="part-head">
+                <span class="part-label">Monty's working</span>
+                <h3 id="appendix-heading">Assumptions &amp; formulae, shown plainly.</h3>
+                <p>What the soothsayer is, and is not, doing behind the curtain.</p>
+            </header>
+            <div class="appendix-grid">
+                <div>
+                    <h5>Assumptions of the model</h5>
+                    <ol class="assumption-list">
+                        <li>Every applicant is placed initially at their stated first preference. Lower preferences are
+                            not consulted unless that applicant is later bumped.</li>
+                        <li>When a hospital is oversubscribed, Monty picks one such hospital <em>uniformly at
+                                random</em> and resolves it; the order of resolution affects who lands where.</li>
+                        <li>Within that hospital, the applicants drawn out to make capacity are chosen <em>uniformly at
+                                random</em> from those present, with the user's party as an indivisible unit in joint
+                            mode.</li>
+                        <li>Displaced applicants who are not the user choose a new hospital with probability
+                            proportional to that hospital's first-preference count (the broader field's revealed taste),
+                            and only among hospitals that still have room.</li>
+                        <li>The user's party, if bumped, walks <em>down the user's own ranked list</em> and takes the
+                            first hospital with capacity for the whole party. If none remain in the ranked list, Monty
+                            places them at any hospital with room; failing that, the final preference is over-filled.
+                        </li>
+                        <li>Joint mode treats the user's pair as a single unit (size 2). Solo mode treats them as a
+                            single applicant (size 1). No other joint applications in the wider field are modelled
+                            explicitly.</li>
+                        <li>Special-circumstances pathways, rural-training streams, bonded positions and the real
+                            ballot's precise priority order are <em>not</em> modelled.</li>
+                        <li>The simulation runs for fifty thousand trials. Each trial halts after at most five hundred
+                            displacement steps to guard against pathological loops.</li>
+                    </ol>
+                </div>
+                <div>
+                    <h5>The formulae, as Monty draws them</h5>
+                    <div class="formulas">
+                        <div class="formula">
+                            <span class="formula-label">Probability your party is drawn out</span>
+                            <span class="formula-expr">P(drawn) <span class="accent">=</span> 1 − <span
+                                    class="accent">∏</span><sub>j=0</sub><sup>e−1</sup> ( n − k − j ) / ( n − j )</span>
+                            <span class="formula-where">
+                                where <code>n</code> is the current applicant count at the hospital, <code>e</code> is
+                                the excess over capacity, and <code>k</code> is your party size (<code>1</code> solo,
+                                <code>2</code> joint). The product is the chance <em>nobody in your party</em> is drawn
+                                across <code>e</code> sequential picks without replacement; one minus that is the chance
+                                at least one of you is.
+                            </span>
+                        </div>
+                        <div class="formula">
+                            <span class="formula-label">Destination for a displaced (non-user) applicant</span>
+                            <span class="formula-expr">P(dest = h) <span class="accent">∝</span> a<sub>h</sub>
+                                &nbsp;·&nbsp; <span class="accent">𝟙</span>[ counts<sub>h</sub> &lt; cap<sub>h</sub>
+                                ]</span>
+                            <span class="formula-where">
+                                where <code>a<sub>h</sub></code> is hospital <code>h</code>'s first-preference applicant
+                                count and the indicator is one only if <code>h</code> still has room and is not the
+                                hospital just resolved.
+                            </span>
+                        </div>
+                        <div class="formula">
+                            <span class="formula-label">Your reported probability of landing at hospital h</span>
+                            <span class="formula-expr">P(land = h) <span class="accent">≈</span> ( trials ending at h )
+                                / N</span>
+                            <span class="formula-where">
+                                with <code>N = 50,000</code>. The Monte Carlo estimate's standard error at
+                                <code>p ≈ 0.5</code> is roughly <code>√(p(1−p)/N) ≈ 0.22%</code>, so
+                                single-percentage-point shifts are within Monty's drawing tremor. Read tenths with
+                                caution.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="colophon">
+            <div class="rule rule-single"></div>
+            <p>
+                <em>Compiled &amp; printed</em> for the 2027 intern ballot by
+                <strong>Zennjo Searle</strong> &amp; <strong>Lizzie Keir</strong>.
+                Source data drawn from the 2027 General Intern Position census.
+            </p>
+            <p class="muted">All readings are illustrative. The lot, when cast, may fall otherwise.</p>
+            <div class="signoff">
+                <p class="signoff-line">Drawn faithfully, as ever, —</p>
+                <p class="signoff-name">Monty</p>
+                <p class="signoff-title">the great</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
