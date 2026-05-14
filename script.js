@@ -3,6 +3,8 @@
  * Ported from simulation.py
  */
 
+// Historical baseline (e.g., last year's first-preference counts).
+// Keep these as the stable reference data for the "historical" preset.
 const HOSPITALS = [
     { name: "SCUH", capacity: 64, applicants: 83 },
     { name: "Toowoomba", capacity: 57, applicants: 34 },
@@ -159,26 +161,30 @@ async function performSimulation(nSims = 50000) {
     return results;
 }
 
+// Live/self-reported first-preference counts for the current cycle.
+// Update this without overwriting historical data above.
 const LIVE_STATUS_REPORT = {
-    "SCUH": 9,
-    "Toowoomba": 6,
-    "TPCH": 5,
     "Bundaberg": 2,
-    "PA Hospital": 4,
-    "Cairns": 12,
-    "Redcliffe": 1,
-    "Townsville": 8,
-    "RBWH": 16,
-    "Redland": 0,
-    "Logan": 5,
-    "Gold Coast": 14,
-    "Mater": 6,
-    "QEII": 4,
-    "Mackay": 1,
     "Caboolture": 1,
+    "Cairns": 12,
+    "Gold Coast": 15,
+    "Greenslopes Private Hospital": 0,
     "Hervey Bay": 0,
     "Ipswich": 1,
-    "Rockhampton": 1
+    "Logan": 5,
+    "Mackay": 1,
+    "Mater": 6,
+    "Mt Isa Hospital": 1,
+    "PA Hospital": 4,
+    "QEII": 4,
+    "Redcliffe": 1,
+    "Redland": 0,
+    "Rockhampton": 1,
+    "RBWH": 16,
+    "SCUH": 9,
+    "TPCH": 5,
+    "Toowoomba": 6,
+    "Townsville": 8
 };
 
 function applyPreset(type) {
@@ -376,7 +382,13 @@ function loadState() {
         }
     }
 
-    if (state) {
+    const isStateValid = state
+        && Array.isArray(state.h)
+        && Array.isArray(state.p)
+        && state.h.length === HOSPITALS.length
+        && state.p.length === HOSPITALS.length;
+
+    if (isStateValid) {
         userPrefs = state.p;
         state.h.forEach((apps, i) => {
             currentHospitals[i].applicants = apps;
@@ -390,14 +402,20 @@ function loadState() {
         const savedMode = localStorage.getItem('readymedygo_mode');
 
         if (savedHospitals) {
-            currentHospitals = JSON.parse(savedHospitals);
+            const parsedHospitals = JSON.parse(savedHospitals);
+            if (Array.isArray(parsedHospitals) && parsedHospitals.length === HOSPITALS.length) {
+                currentHospitals = parsedHospitals;
+            }
         }
         if (savedMode === 'solo' || savedMode === 'joint') {
             applicationMode = savedMode;
         }
 
         if (savedPrefs) {
-            userPrefs = JSON.parse(savedPrefs);
+            const parsedPrefs = JSON.parse(savedPrefs);
+            if (Array.isArray(parsedPrefs) && parsedPrefs.length === HOSPITALS.length) {
+                userPrefs = parsedPrefs;
+            }
         } else {
             resetToDefaults();
             return;
