@@ -6,6 +6,7 @@
 // Historical baseline (e.g., last year's first-preference counts).
 // Keep these as the stable reference data for the "historical" preset.
 const HOSPITALS = [
+    { name: "Greenslopes Private Hospital", capacity: 12, applicants: 6 },
     { name: "SCUH", capacity: 64, applicants: 83 },
     { name: "Toowoomba", capacity: 57, applicants: 34 },
     { name: "TPCH", capacity: 50, applicants: 30 },
@@ -168,7 +169,7 @@ const LIVE_STATUS_REPORT = {
     "Caboolture": 1,
     "Cairns": 12,
     "Gold Coast": 15,
-    "Greenslopes Private Hospital": 0, // Private facility; not in the public intern ballot list.
+    "Greenslopes Private Hospital": 0,
     "Hervey Bay": 0,
     "Ipswich": 1,
     "Logan": 5,
