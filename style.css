@@ -831,6 +831,8 @@ input[type=number]::-webkit-outer-spin-button {
 /* ─────────────── PART III · CAST ─────────────── */
 .part-cast { /* uses the standard .part / .part-head treatment */ }
 
+.cast-controls { margin-bottom: 2rem; }
+
 .cast-card {
     background: var(--paper);
     border: 1.5px solid var(--ink);
@@ -1371,13 +1373,12 @@ input[type=number]::-webkit-outer-spin-button {
     to { opacity: 1; transform: translateY(0); }
 }
 
-.masthead, .hero, .two-col, .intervention, .colophon {
+.masthead, .hero, .two-col, .colophon {
     animation: drawIn 0.85s cubic-bezier(0.2, 0.7, 0.3, 1) backwards;
 }
 .masthead   { animation-delay: 0.00s; }
 .hero       { animation-delay: 0.12s; }
 .two-col    { animation-delay: 0.26s; }
-.intervention { animation-delay: 0.38s; }
 .colophon   { animation-delay: 0.50s; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1393,7 +1394,6 @@ input[type=number]::-webkit-outer-spin-button {
 .btn:focus-visible,
 .mode-option:focus-visible,
 .fallback-option:focus-visible,
-.preset-btn:focus-visible,
 input:focus-visible,
 .controls button:focus-visible {
     outline: 2px solid var(--accent);
