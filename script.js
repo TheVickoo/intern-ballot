@@ -163,7 +163,7 @@ async function performSimulation(nSims = 50000) {
     const results = new Array(currentHospitals.length).fill(0);
     const party = partySize();
 
-    const chunkSize = 5000;
+    const chunkSize = 2000;
     for (let i = 0; i < nSims; i += chunkSize) {
         for (let j = 0; j < chunkSize && (i + j) < nSims; j++) {
             const outcome = runSingleBallot(capacities, firstPrefCounts, userPrefs, party);
@@ -278,25 +278,6 @@ function renderPreferenceList() {
 
         list.appendChild(item);
     });
-
-    list.addEventListener('dragover', e => {
-        e.preventDefault();
-        const afterElement = getDragAfterElement(list, e.clientY);
-        const dragging = document.querySelector('.dragging');
-        if (afterElement == null) {
-            list.appendChild(dragging);
-        } else {
-            list.insertBefore(dragging, afterElement);
-        }
-    });
-
-    // Handle drag drop to update state
-    list.addEventListener('drop', () => {
-        const items = [...list.querySelectorAll('.sortable-item')];
-        userPrefs = items.map(item => parseInt(item.dataset.index));
-        saveState();
-        renderPreferenceList();
-    });
 }
 
 function getDragAfterElement(container, y) {
@@ -377,6 +358,10 @@ function saveState() {
     updateURL();
 }
 
+function toBase64(value) {
+    return btoa(unescape(encodeURIComponent(value)));
+}
+
 function updateURL() {
     const state = {
         p: userPrefs,
@@ -384,8 +369,30 @@ function updateURL() {
         m: applicationMode,
         f: fallbackMode
     };
-    const encoded = btoa(JSON.stringify(state));
+    const encoded = toBase64(JSON.stringify(state));
     window.history.replaceState(null, '', `#${encoded}`);
+}
+
+function isValidPreferenceOrder(prefList) {
+    if (!Array.isArray(prefList)) return false;
+    if (prefList.length !== HOSPITALS.length) return false;
+
+    const seen = new Set();
+    for (const value of prefList) {
+        if (!Number.isInteger(value)) return false;
+        if (value < 0 || value >= HOSPITALS.length) return false;
+        if (seen.has(value)) return false;
+        seen.add(value);
+    }
+
+    return true;
+}
+
+function isValidApplicantCounts(counts) {
+    if (!Array.isArray(counts)) return false;
+    if (counts.length !== HOSPITALS.length) return false;
+
+    return counts.every(value => Number.isFinite(value) && value >= 0);
 }
 
 function loadState() {
@@ -401,10 +408,8 @@ function loadState() {
     }
 
     const isStateValid = state
-        && Array.isArray(state.h)
-        && Array.isArray(state.p)
-        && state.h.length === HOSPITALS.length
-        && state.p.length === HOSPITALS.length;
+        && isValidApplicantCounts(state.h)
+        && isValidPreferenceOrder(state.p);
 
     if (isStateValid) {
         userPrefs = state.p;
@@ -438,7 +443,7 @@ function loadState() {
 
         if (savedPrefs) {
             const parsedPrefs = JSON.parse(savedPrefs);
-            if (Array.isArray(parsedPrefs) && parsedPrefs.length === HOSPITALS.length) {
+            if (isValidPreferenceOrder(parsedPrefs)) {
                 userPrefs = parsedPrefs;
             }
         } else {
@@ -446,6 +451,34 @@ function loadState() {
             return;
         }
     }
+}
+
+function setupPreferenceDragAndDrop() {
+    const list = document.getElementById('preference-list');
+    if (!list) return;
+    if (list.dataset.dragBound === 'true') return;
+
+    list.addEventListener('dragover', e => {
+        e.preventDefault();
+        const afterElement = getDragAfterElement(list, e.clientY);
+        const dragging = document.querySelector('.dragging');
+        if (!dragging) return;
+        if (afterElement == null) {
+            list.appendChild(dragging);
+        } else {
+            list.insertBefore(dragging, afterElement);
+        }
+    });
+
+    // Handle drag drop to update state
+    list.addEventListener('drop', () => {
+        const items = [...list.querySelectorAll('.sortable-item')];
+        userPrefs = items.map(item => parseInt(item.dataset.index, 10));
+        saveState();
+        renderPreferenceList();
+    });
+
+    list.dataset.dragBound = 'true';
 }
 
 function setMode(mode) {
@@ -514,6 +547,13 @@ function copyShareLink() {
         setTimeout(() => {
             status.innerText = originalText;
         }, 2000);
+    }).catch(() => {
+        const status = document.getElementById('status-text');
+        const originalText = status.innerText;
+        status.innerText = "Monty couldn't seal the link. Please copy from the address bar.";
+        setTimeout(() => {
+            status.innerText = originalText;
+        }, 3000);
     });
 }
 
@@ -611,6 +651,7 @@ function displayResults(results) {
 window.addEventListener('DOMContentLoaded', () => {
     loadState();
     renderUI();
+    setupPreferenceDragAndDrop();
     renderModeSwitch();
     renderFallbackSwitch();
     document.getElementById('run-btn').addEventListener('click', runSimulation);
@@ -621,4 +662,3 @@ window.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => setFallback(btn.dataset.fallback));
     });
 });
-
