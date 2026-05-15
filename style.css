@@ -373,6 +373,114 @@ body::before {
     box-shadow: inset 0 0 0 2px var(--ink);
 }
 
+/* ─────────────── FALLBACK GRID ─────────────── */
+.fallback-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.85rem;
+    margin-top: 1rem;
+}
+
+.fallback-option {
+    appearance: none;
+    background: var(--paper-2);
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    text-align: left;
+    padding: 1rem 1rem 0.95rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    font-family: inherit;
+    position: relative;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.08s ease, box-shadow 0.18s ease;
+    box-shadow: 2px 2px 0 var(--ink);
+}
+
+.fallback-option:hover:not(.is-active) {
+    background: var(--paper-3);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--ink);
+}
+
+.fallback-option:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--ink);
+}
+
+.fallback-option.is-active {
+    background: var(--ink);
+    color: var(--paper);
+    box-shadow: 3px 3px 0 var(--accent);
+    transform: translate(-1px, -1px);
+}
+
+.fallback-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.fallback-option .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1.5px solid var(--ink);
+    background: transparent;
+    flex-shrink: 0;
+    transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.fallback-option.is-active .dot {
+    border-color: var(--paper);
+    background: var(--accent);
+    box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+.fallback-option .mode-text {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 500;
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+}
+
+.fallback-option .mode-text em {
+    font-style: italic;
+    font-size: 0.8rem;
+    color: var(--ink-3);
+    font-weight: 400;
+    transition: color 0.18s ease;
+}
+
+.fallback-option.is-active .mode-text em {
+    color: var(--paper-2);
+}
+
+.fallback-desc {
+    margin: 0;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: var(--ink-2);
+    transition: color 0.18s ease;
+}
+
+.fallback-option.is-active .fallback-desc {
+    color: var(--paper-3);
+}
+
+@media (max-width: 920px) {
+    .fallback-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+    .fallback-grid { grid-template-columns: 1fr; }
+}
+
 /* ─────────────── MAIN / SECTIONS ─────────────── */
 .main { display: flex; flex-direction: column; gap: 4.5rem; }
 
@@ -1265,6 +1373,7 @@ input[type=number]::-webkit-outer-spin-button {
 .sortable-item:focus-visible,
 .btn:focus-visible,
 .mode-option:focus-visible,
+.fallback-option:focus-visible,
 .preset-btn:focus-visible,
 input:focus-visible,
 .controls button:focus-visible {
@@ -1279,8 +1388,8 @@ input:focus-visible,
     .masthead-row .folio-left,
     .masthead-row .folio-right { text-align: center; }
     .hero-title { font-size: clamp(2.5rem, 12vw, 4rem); }
-    .mode-switch { width: 100%; }
-    .mode-option { flex: 1; justify-content: center; }
+    .mode-switch { width: 100%; flex-wrap: wrap; }
+    .mode-option, .fallback-option { flex: 1; justify-content: center; }
     .intervention-actions { flex-direction: column; align-items: stretch; width: 100%; }
     .btn { width: 100%; }
 }

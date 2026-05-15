@@ -146,6 +146,39 @@
                     <p>When the order is set and the field looks right, ask Monty to draw the ballot fifty thousand
                         times.</p>
                 </header>
+                <div style="margin-bottom: 2rem;">
+                    <p class="presets-label"><span class="ornament">☞</span> Select how displaced applicants choose their backup hospitals.</p>
+                    <div class="fallback-grid" role="radiogroup" aria-label="Fallback mode">
+                        <button type="button" class="fallback-option is-active" data-fallback="raw" role="radio" aria-checked="true">
+                            <div class="fallback-card-header">
+                                <span class="dot"></span>
+                                <span class="mode-text">Raw <em>Standard</em></span>
+                            </div>
+                            <p class="fallback-desc">Uses raw first-preference counts. Mega-hospitals absorb most fallback applicants.</p>
+                        </button>
+                        <button type="button" class="fallback-option" data-fallback="sqrt" role="radio" aria-checked="false">
+                            <div class="fallback-card-header">
+                                <span class="dot"></span>
+                                <span class="mode-text">Flattened <em>Sqrt</em></span>
+                            </div>
+                            <p class="fallback-desc">Uses the square root of counts, allowing mid-tier hospitals to act as stronger backups.</p>
+                        </button>
+                        <button type="button" class="fallback-option" data-fallback="geo" role="radio" aria-checked="false">
+                            <div class="fallback-card-header">
+                                <span class="dot"></span>
+                                <span class="mode-text">Geography <em>Regional</em></span>
+                            </div>
+                            <p class="fallback-desc">Multiplies fallback weights by 3× if the hospital is in the same region as the one displaced from.</p>
+                        </button>
+                        <button type="button" class="fallback-option" data-fallback="combo" role="radio" aria-checked="false">
+                            <div class="fallback-card-header">
+                                <span class="dot"></span>
+                                <span class="mode-text">Combo <em>Sqrt+Geo</em></span>
+                            </div>
+                            <p class="fallback-desc">Combines Flattened and Geography models for the most realistic cascading behavior.</p>
+                        </button>
+                    </div>
+                </div>
                 <div class="cast-card">
                     <span class="cast-flourish" aria-hidden="true">⁂</span>
                     <button id="run-btn" class="btn btn-cast" type="button">
@@ -262,8 +295,8 @@
                                 random</em> from those present, with the user's party as an indivisible unit in joint
                             mode.</li>
                         <li>Displaced applicants who are not the user choose a new hospital with probability
-                            proportional to that hospital's first-preference count (the broader field's revealed taste),
-                            and only among hospitals that still have room.</li>
+                            proportional to their fallback weight (based on the selected fallback model),
+                            and only among hospitals that still have room. The "Combo" model uses the square root of the first-preference count to flatten demand, and multiplies it by 3.0 if the hospital is in the same geographic region as the one they were bumped from.</li>
                         <li>The user's party, if bumped, walks <em>down the user's own ranked list</em> and takes the
                             first hospital with capacity for the whole party. If none remain in the ranked list, Monty
                             places them at any hospital with room; failing that, the final preference is over-filled.
@@ -294,13 +327,12 @@
                         </div>
                         <div class="formula">
                             <span class="formula-label">Destination for a displaced (non-user) applicant</span>
-                            <span class="formula-expr">P(dest = h) <span class="accent">∝</span> a<sub>h</sub>
+                            <span class="formula-expr">P(dest = h) <span class="accent">∝</span> w<sub>h</sub>
                                 &nbsp;·&nbsp; <span class="accent">𝟙</span>[ counts<sub>h</sub> &lt; cap<sub>h</sub>
                                 ]</span>
                             <span class="formula-where">
-                                where <code>a<sub>h</sub></code> is hospital <code>h</code>'s first-preference applicant
-                                count and the indicator is one only if <code>h</code> still has room and is not the
-                                hospital just resolved.
+                                where <code>w<sub>h</sub></code> is hospital <code>h</code>'s calculated fallback weight
+                                based on the chosen mode (e.g. <code>a<sub>h</sub></code> for Raw, or <code>√(a<sub>h</sub>) · 3.0</code> for Combo if in the same region), and the indicator is one only if <code>h</code> still has room and is not the hospital just resolved.
                             </span>
                         </div>
                         <div class="formula">

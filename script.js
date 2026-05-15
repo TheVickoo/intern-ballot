@@ -6,32 +6,33 @@
 // Historical baseline (e.g., last year's first-preference counts).
 // Keep these as the stable reference data for the "historical" preset.
 const HOSPITALS = [
-    { name: "Greenslopes Private Hospital", capacity: 12, applicants: 6 },
-    { name: "SCUH", capacity: 64, applicants: 83 },
-    { name: "Toowoomba", capacity: 57, applicants: 34 },
-    { name: "TPCH", capacity: 50, applicants: 30 },
-    { name: "Bundaberg", capacity: 6, applicants: 5 },
-    { name: "PA Hospital", capacity: 82, applicants: 114 },
-    { name: "Cairns", capacity: 54, applicants: 54 },
-    { name: "Redcliffe", capacity: 28, applicants: 10 },
-    { name: "Townsville", capacity: 71, applicants: 33 },
-    { name: "RBWH", capacity: 94, applicants: 122 },
-    { name: "Redland", capacity: 15, applicants: 14 },
-    { name: "Logan", capacity: 45, applicants: 56 },
-    { name: "Gold Coast", capacity: 92, applicants: 162 },
-    { name: "Mater", capacity: 18, applicants: 18 },
-    { name: "QEII", capacity: 22, applicants: 13 },
-    { name: "Mackay", capacity: 28, applicants: 2 },
-    { name: "Caboolture", capacity: 23, applicants: 3 },
-    { name: "Hervey Bay", capacity: 8, applicants: 4 },
-    { name: "Ipswich", capacity: 45, applicants: 18 },
-    { name: "Rockhampton", capacity: 50, applicants: 2 }
+    { name: "Greenslopes Private Hospital", capacity: 12, applicants: 6, region: "SEQ" },
+    { name: "SCUH", capacity: 64, applicants: 83, region: "SEQ" },
+    { name: "Toowoomba", capacity: 57, applicants: 34, region: "West" },
+    { name: "TPCH", capacity: 50, applicants: 30, region: "SEQ" },
+    { name: "Bundaberg", capacity: 6, applicants: 5, region: "Central" },
+    { name: "PA Hospital", capacity: 82, applicants: 114, region: "SEQ" },
+    { name: "Cairns", capacity: 54, applicants: 54, region: "North" },
+    { name: "Redcliffe", capacity: 28, applicants: 10, region: "SEQ" },
+    { name: "Townsville", capacity: 71, applicants: 33, region: "North" },
+    { name: "RBWH", capacity: 94, applicants: 122, region: "SEQ" },
+    { name: "Redland", capacity: 15, applicants: 14, region: "SEQ" },
+    { name: "Logan", capacity: 45, applicants: 56, region: "SEQ" },
+    { name: "Gold Coast", capacity: 92, applicants: 162, region: "SEQ" },
+    { name: "Mater", capacity: 18, applicants: 18, region: "SEQ" },
+    { name: "QEII", capacity: 22, applicants: 13, region: "SEQ" },
+    { name: "Mackay", capacity: 28, applicants: 2, region: "North" },
+    { name: "Caboolture", capacity: 23, applicants: 3, region: "SEQ" },
+    { name: "Hervey Bay", capacity: 8, applicants: 4, region: "Central" },
+    { name: "Ipswich", capacity: 45, applicants: 18, region: "SEQ" },
+    { name: "Rockhampton", capacity: 50, applicants: 2, region: "Central" }
 ];
 
 // Initialize application state
 let currentHospitals = JSON.parse(JSON.stringify(HOSPITALS));
 let userPrefs = []; // Indices into currentHospitals
 let applicationMode = 'solo'; // 'joint' = couple (2), 'solo' = single (1)
+let fallbackMode = 'raw'; // 'raw', 'sqrt', 'geo', 'combo'
 
 function partySize() {
     return applicationMode === 'joint' ? 2 : 1;
@@ -97,7 +98,21 @@ function runSingleBallot(capacities, firstPrefCounts, userPreferenceIndices, par
         // Place displaced non-user applicants
         for (let i = 0; i < nonUserToPlace; i++) {
             const weights = counts.map((c, h) => {
-                return (h !== chosen && counts[h] < capacities[h]) ? firstPrefCounts[h] : 0;
+                if (h === chosen || counts[h] >= capacities[h]) return 0;
+
+                let baseWeight = firstPrefCounts[h];
+                if (fallbackMode === 'sqrt' || fallbackMode === 'combo') {
+                    baseWeight = Math.sqrt(baseWeight);
+                }
+
+                let multiplier = 1.0;
+                if (fallbackMode === 'geo' || fallbackMode === 'combo') {
+                    if (currentHospitals[h].region === currentHospitals[chosen].region) {
+                        multiplier = 3.0;
+                    }
+                }
+
+                return baseWeight * multiplier;
             });
             const dest = weightedChoice(weights);
             if (dest >= 0) counts[dest]++;
@@ -168,7 +183,7 @@ const LIVE_STATUS_REPORT = {
     "Bundaberg": 2,
     "Caboolture": 1,
     "Cairns": 12,
-    "Gold Coast": 15,
+    "Gold Coast": 16,
     "Greenslopes Private Hospital": 0,
     "Hervey Bay": 0,
     "Ipswich": 1,
@@ -203,7 +218,7 @@ function applyPreset(type) {
     } else if (type === 'extrapolate') {
         const totalHistorical = HOSPITALS.reduce((sum, h) => sum + h.applicants, 0);
         const totalLive = Object.values(LIVE_STATUS_REPORT).reduce((sum, val) => sum + val, 0);
-        
+
         if (totalLive > 0) {
             const scale = totalHistorical / totalLive;
             currentHospitals.forEach((hosp, i) => {
@@ -358,6 +373,7 @@ function saveState() {
     localStorage.setItem('readymedygo_userPrefs', JSON.stringify(userPrefs));
     localStorage.setItem('readymedygo_hospitals', JSON.stringify(currentHospitals));
     localStorage.setItem('readymedygo_mode', applicationMode);
+    localStorage.setItem('readymedygo_fallback', fallbackMode);
     updateURL();
 }
 
@@ -365,7 +381,8 @@ function updateURL() {
     const state = {
         p: userPrefs,
         h: currentHospitals.map(h => h.applicants),
-        m: applicationMode
+        m: applicationMode,
+        f: fallbackMode
     };
     const encoded = btoa(JSON.stringify(state));
     window.history.replaceState(null, '', `#${encoded}`);
@@ -397,10 +414,14 @@ function loadState() {
         if (state.m === 'solo' || state.m === 'joint') {
             applicationMode = state.m;
         }
+        if (state.f && ['raw', 'sqrt', 'geo', 'combo'].includes(state.f)) {
+            fallbackMode = state.f;
+        }
     } else {
         const savedPrefs = localStorage.getItem('readymedygo_userPrefs');
         const savedHospitals = localStorage.getItem('readymedygo_hospitals');
         const savedMode = localStorage.getItem('readymedygo_mode');
+        const savedFallback = localStorage.getItem('readymedygo_fallback');
 
         if (savedHospitals) {
             const parsedHospitals = JSON.parse(savedHospitals);
@@ -410,6 +431,9 @@ function loadState() {
         }
         if (savedMode === 'solo' || savedMode === 'joint') {
             applicationMode = savedMode;
+        }
+        if (savedFallback && ['raw', 'sqrt', 'geo', 'combo'].includes(savedFallback)) {
+            fallbackMode = savedFallback;
         }
 
         if (savedPrefs) {
@@ -438,9 +462,29 @@ function setMode(mode) {
         : 'Monty shifts to a solo reading. Cast the lots to refresh.';
 }
 
+function setFallback(mode) {
+    if (!['raw', 'sqrt', 'geo', 'combo'].includes(mode)) return;
+    if (mode === fallbackMode) return;
+    fallbackMode = mode;
+    saveState();
+    renderFallbackSwitch();
+    // Hide stale results so the user re-runs against the new mode
+    const resultsSection = document.getElementById('results');
+    if (resultsSection) resultsSection.style.display = 'none';
+    document.getElementById('status-text').innerText = 'Monty shifts his fallback logic. Cast the lots to refresh.';
+}
+
 function renderModeSwitch() {
     document.querySelectorAll('.mode-option').forEach(btn => {
         const active = btn.dataset.mode === applicationMode;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-checked', active ? 'true' : 'false');
+    });
+}
+
+function renderFallbackSwitch() {
+    document.querySelectorAll('.fallback-option').forEach(btn => {
+        const active = btn.dataset.fallback === fallbackMode;
         btn.classList.toggle('is-active', active);
         btn.setAttribute('aria-checked', active ? 'true' : 'false');
     });
@@ -454,9 +498,11 @@ function resetToDefaults() {
         .sort((a, b) => b.applicants - a.applicants)
         .map(o => o.i);
     applicationMode = 'solo';
+    fallbackMode = 'raw';
     saveState();
     renderUI();
     renderModeSwitch();
+    renderFallbackSwitch();
 }
 
 function copyShareLink() {
@@ -566,8 +612,13 @@ window.addEventListener('DOMContentLoaded', () => {
     loadState();
     renderUI();
     renderModeSwitch();
+    renderFallbackSwitch();
     document.getElementById('run-btn').addEventListener('click', runSimulation);
     document.querySelectorAll('.mode-option').forEach(btn => {
         btn.addEventListener('click', () => setMode(btn.dataset.mode));
     });
+    document.querySelectorAll('.fallback-option').forEach(btn => {
+        btn.addEventListener('click', () => setFallback(btn.dataset.fallback));
+    });
 });
+
