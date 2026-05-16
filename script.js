@@ -180,26 +180,26 @@ async function performSimulation(nSims = 50000) {
 // Live/self-reported first-preference counts for the current cycle.
 // Update this without overwriting historical data above.
 const LIVE_STATUS_REPORT = {
-    "Bundaberg": 2,
+    "Bundaberg": 3,
     "Caboolture": 1,
-    "Cairns": 12,
-    "Gold Coast": 16,
+    "Cairns": 13,
+    "Gold Coast": 19,
     "Greenslopes Private Hospital": 0,
     "Hervey Bay": 0,
-    "Ipswich": 1,
+    "Ipswich": 2,
     "Logan": 5,
     "Mackay": 1,
-    "Mater": 6,
+    "Mater": 7,
     "Mt Isa Hospital": 1, // Capacity is 0, so it is not included in the simulation.
-    "PA Hospital": 4,
+    "PA Hospital": 6,
     "QEII": 4,
     "Redcliffe": 1,
     "Redland": 0,
     "Rockhampton": 1,
-    "RBWH": 16,
-    "SCUH": 9,
-    "TPCH": 5,
-    "Toowoomba": 6,
+    "RBWH": 18,
+    "SCUH": 11,
+    "TPCH": 6,
+    "Toowoomba": 7,
     "Townsville": 8
 };
 
