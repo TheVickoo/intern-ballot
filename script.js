@@ -182,25 +182,25 @@ async function performSimulation(nSims = 50000) {
 const LIVE_STATUS_REPORT = {
     "Bundaberg": 3,
     "Caboolture": 1,
-    "Cairns": 13,
-    "Gold Coast": 19,
+    "Cairns": 15,
+    "Gold Coast": 21,
     "Greenslopes Private Hospital": 0,
     "Hervey Bay": 0,
-    "Ipswich": 2,
-    "Logan": 5,
+    "Ipswich": 3,
+    "Logan": 6,
     "Mackay": 1,
     "Mater": 7,
     "Mt Isa Hospital": 1, // Capacity is 0, so it is not included in the simulation.
-    "PA Hospital": 6,
+    "PA Hospital": 7,
     "QEII": 4,
     "Redcliffe": 1,
     "Redland": 0,
     "Rockhampton": 1,
-    "RBWH": 18,
-    "SCUH": 11,
+    "RBWH": 17,
+    "SCUH": 13,
     "TPCH": 6,
-    "Toowoomba": 7,
-    "Townsville": 8
+    "Toowoomba": 9,
+    "Townsville": 9
 };
 
 function applyPreset(type) {
