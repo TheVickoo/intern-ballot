@@ -41,6 +41,15 @@ This is a static single-page application with no build step or dependencies. Edi
 python3 -m http.server 8000
 ```
 
+## Geography matrix
+
+The geography fallback weights are precomputed and stored in `script.js`.
+To regenerate them from the stored coordinates, run:
+
+```bash
+node scripts/generate-geo-matrix.js
+```
+
 ## License
 
 MIT
