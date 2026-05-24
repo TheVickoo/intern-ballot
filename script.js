@@ -15,6 +15,7 @@ const HOSPITALS = [
     { name: "Cairns", capacity: 54, applicants: 54, region: "North" },
     { name: "Redcliffe", capacity: 28, applicants: 10, region: "SEQ" },
     { name: "Townsville", capacity: 71, applicants: 33, region: "North" },
+    { name: "Mt Isa Hospital", capacity: 2, applicants: 1, region: "West" },
     { name: "RBWH", capacity: 94, applicants: 122, region: "SEQ" },
     { name: "Redland", capacity: 15, applicants: 14, region: "SEQ" },
     { name: "Logan", capacity: 45, applicants: 56, region: "SEQ" },
@@ -180,27 +181,27 @@ async function performSimulation(nSims = 50000) {
 // Live/self-reported first-preference counts for the current cycle.
 // Update this without overwriting historical data above.
 const LIVE_STATUS_REPORT = {
-    "Bundaberg": 3,
+    "Bundaberg": 4,
     "Caboolture": 1,
-    "Cairns": 15,
-    "Gold Coast": 21,
+    "Cairns": 20,
+    "Gold Coast": 36,
     "Greenslopes Private Hospital": 0,
     "Hervey Bay": 0,
-    "Ipswich": 3,
-    "Logan": 6,
-    "Mackay": 1,
-    "Mater": 7,
-    "Mt Isa Hospital": 1, // Capacity is 0, so it is not included in the simulation.
-    "PA Hospital": 7,
-    "QEII": 4,
+    "Ipswich": 6,
+    "Logan": 14,
+    "Mackay": 2,
+    "Mater": 12,
+    "Mt Isa Hospital": 1,
+    "PA Hospital": 13,
+    "QEII": 5,
     "Redcliffe": 1,
-    "Redland": 0,
+    "Redland": 1,
     "Rockhampton": 1,
-    "RBWH": 17,
-    "SCUH": 13,
-    "TPCH": 6,
-    "Toowoomba": 9,
-    "Townsville": 9
+    "RBWH": 26,
+    "SCUH": 17,
+    "TPCH": 7,
+    "Toowoomba": 21,
+    "Townsville": 14
 };
 
 function applyPreset(type) {
