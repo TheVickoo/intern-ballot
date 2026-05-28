@@ -216,25 +216,25 @@ async function performSimulation(nSims = 50000) {
 const LIVE_STATUS_REPORT = {
     "Bundaberg": 4,
     "Caboolture": 1,
-    "Cairns": 20,
-    "Gold Coast": 36,
+    "Cairns": 24,
+    "Gold Coast": 47,
     "Greenslopes Private Hospital": 0,
     "Hervey Bay": 0,
-    "Ipswich": 6,
-    "Logan": 14,
-    "Mackay": 2,
-    "Mater": 12,
+    "Ipswich": 10,
+    "Logan": 19,
+    "Mackay": 3,
+    "Mater": 15,
     "Mt Isa Hospital": 1,
-    "PA Hospital": 13,
-    "QEII": 5,
+    "PA Hospital": 27,
+    "QEII": 6,
     "Redcliffe": 1,
     "Redland": 1,
     "Rockhampton": 1,
-    "RBWH": 26,
-    "SCUH": 17,
-    "TPCH": 7,
-    "Toowoomba": 21,
-    "Townsville": 14
+    "RBWH": 39,
+    "SCUH": 24,
+    "TPCH": 9,
+    "Toowoomba": 23,
+    "Townsville": 22
 };
 
 function applyPreset(type) {
