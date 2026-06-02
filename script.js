@@ -676,27 +676,27 @@ async function performSimulation(nSims = 50000) {
 // Live/self-reported first-preference counts for the current cycle.
 // Update this without overwriting historical data above.
 const LIVE_STATUS_REPORT = {
-    "Bundaberg Hospital": 4,
-    "Caboolture Hospital": 2,
-    "Cairns Hospital": 31,
-    "Gold Coast Hospital": 75,
+    "Bundaberg Hospital": 3,
+    "Caboolture Hospital": 3,
+    "Cairns Hospital": 38,
+    "Gold Coast Hospital": 89,
     "Greenslopes Private Hospital": 0,
     "Hervey Bay Hospital": 0,
-    "Ipswich Hospital": 12,
-    "Logan Hospital": 27,
+    "Ipswich Hospital": 14,
+    "Logan Hospital": 32,
     "Mackay Base Hospital": 3,
-    "Mater Health Services": 19,
+    "Mater Health Services": 20,
     "Mt Isa Hospital": 1,
-    "Princess Alexandra Hospital": 37,
-    "Queen Elizabeth II Jubilee Hospital": 10,
-    "Redcliffe Hospital": 4,
-    "Redland Hospital": 1,
+    "Princess Alexandra Hospital": 49,
+    "Queen Elizabeth II Jubilee Hospital": 13,
+    "Redcliffe Hospital": 7,
+    "Redland Hospital": 2,
     "Rockhampton Base Hospital": 3,
-    "Royal Brisbane and Women's Hospital": 60,
-    "Sunshine Coast University Hospital": 37,
-    "The Prince Charles Hospital": 14,
-    "Toowoomba Hospital": 27,
-    "Townsville University Hospital": 27
+    "Royal Brisbane and Women's Hospital": 91,
+    "Sunshine Coast University Hospital": 50,
+    "The Prince Charles Hospital": 16,
+    "Toowoomba Hospital": 36,
+    "Townsville University Hospital": 30
 };
 
 function applyPreset(type) {
