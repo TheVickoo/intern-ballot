@@ -1021,7 +1021,14 @@ function renderFallbackSwitch() {
 
 function resetToDefaults() {
     currentHospitals = JSON.parse(JSON.stringify(HOSPITALS));
-    // Default order: most to least popular by historical first-preference count.
+    // Default to 'live' data instead of historical
+    currentHospitals.forEach((hosp, i) => {
+        if (LIVE_STATUS_REPORT[hosp.name] !== undefined) {
+            currentHospitals[i].applicants = LIVE_STATUS_REPORT[hosp.name];
+        }
+    });
+
+    // Default order: most to least popular by current live first-preference count.
     userPrefs = currentHospitals
         .map((h, i) => ({ i, applicants: h.applicants }))
         .sort((a, b) => b.applicants - a.applicants)
