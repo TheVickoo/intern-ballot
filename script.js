@@ -678,25 +678,25 @@ async function performSimulation(nSims = 50000) {
 const LIVE_STATUS_REPORT = {
     "Bundaberg Hospital": 3,
     "Caboolture Hospital": 3,
-    "Cairns Hospital": 38,
-    "Gold Coast Hospital": 89,
+    "Cairns Hospital": 46,
+    "Gold Coast Hospital": 107,
     "Greenslopes Private Hospital": 0,
     "Hervey Bay Hospital": 0,
     "Ipswich Hospital": 14,
-    "Logan Hospital": 32,
-    "Mackay Base Hospital": 3,
-    "Mater Health Services": 20,
+    "Logan Hospital": 35,
+    "Mackay Base Hospital": 4,
+    "Mater Health Services": 23,
     "Mt Isa Hospital": 1,
-    "Princess Alexandra Hospital": 49,
-    "Queen Elizabeth II Jubilee Hospital": 13,
+    "Princess Alexandra Hospital": 60,
+    "Queen Elizabeth II Jubilee Hospital": 14,
     "Redcliffe Hospital": 7,
-    "Redland Hospital": 2,
+    "Redland Hospital": 3,
     "Rockhampton Base Hospital": 3,
-    "Royal Brisbane and Women's Hospital": 91,
-    "Sunshine Coast University Hospital": 50,
-    "The Prince Charles Hospital": 16,
-    "Toowoomba Hospital": 36,
-    "Townsville University Hospital": 30
+    "Royal Brisbane and Women's Hospital": 105,
+    "Sunshine Coast University Hospital": 56,
+    "The Prince Charles Hospital": 18,
+    "Toowoomba Hospital": 43,
+    "Townsville University Hospital": 35
 };
 
 function applyPreset(type) {
