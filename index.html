@@ -101,25 +101,23 @@
                     <p class="presets-label"><span class="ornament">☞</span> Load a field, by Monty's hand, or adjust
                         the numbers below manually.</p>
                     <div class="presets" role="group" aria-label="Applicant data presets">
-                        <button type="button" class="preset" onclick="applyPreset('historical')">
-                            <span class="preset-name">Historical <span class="preset-year">· 2026</span></span>
-                            <span class="preset-desc">Last year's first-preference counts. The baseline; the closest
-                                thing to a complete field. (Note: Greenslopes is arbitrarily set to half-capacity as a
-                                baseline).</span>
-                            <span class="preset-cta">Load this field <span class="arrow"
-                                    aria-hidden="true">→</span></span>
-                        </button>
                         <button type="button" class="preset" onclick="applyPreset('live')">
                             <span class="preset-name">Live status</span>
                             <span class="preset-desc">Self-reported preferences from this year's cohort. Always
-                                under-reported. Useful as a floor.</span>
+                                under-reported, but represents the current certain competition.</span>
                             <span class="preset-cta">Load this field <span class="arrow"
                                     aria-hidden="true">→</span></span>
                         </button>
                         <button type="button" class="preset" onclick="applyPreset('extrapolate')">
                             <span class="preset-name">Extrapolated</span>
                             <span class="preset-desc">Live numbers scaled to last year's total. Monty's best guess of
-                                the full field.</span>
+                                how the final field will land.</span>
+                            <span class="preset-cta">Load this field <span class="arrow"
+                                    aria-hidden="true">→</span></span>
+                        </button>
+                        <button type="button" class="preset" onclick="applyPreset('historical')">
+                            <span class="preset-name">Historical <span class="preset-year">· 2026</span></span>
+                            <span class="preset-desc">Last year's final first-preference counts. Useful as a baseline for total field size and long-term popularity.</span>
                             <span class="preset-cta">Load this field <span class="arrow"
                                     aria-hidden="true">→</span></span>
                         </button>
