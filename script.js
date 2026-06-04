@@ -711,18 +711,6 @@ function applyPreset(type) {
                 currentHospitals[i].applicants = LIVE_STATUS_REPORT[hosp.name];
             }
         });
-    } else if (type === 'extrapolate') {
-        const totalHistorical = HOSPITALS.reduce((sum, h) => sum + h.applicants, 0);
-        const totalLive = Object.values(LIVE_STATUS_REPORT).reduce((sum, val) => sum + val, 0);
-
-        if (totalLive > 0) {
-            const scale = totalHistorical / totalLive;
-            currentHospitals.forEach((hosp, i) => {
-                if (LIVE_STATUS_REPORT[hosp.name] !== undefined) {
-                    currentHospitals[i].applicants = Math.round(LIVE_STATUS_REPORT[hosp.name] * scale);
-                }
-            });
-        }
     }
     saveState();
     renderDataTable();
