@@ -6,7 +6,7 @@
 // Historical baseline (e.g., last year's first-preference counts).
 // Keep these as the stable reference data for the "historical" preset.
 const HOSPITALS = [
-    { name: "Greenslopes Private Hospital", capacity: 12, applicants: 6, region: "SEQ" },
+    { name: "Greenslopes Private Hospital", capacity: 12, applicants: 0, region: "SEQ" },
     { name: "Sunshine Coast University Hospital", capacity: 64, applicants: 83, region: "SEQ" },
     { name: "Toowoomba Hospital", capacity: 57, applicants: 34, region: "West" },
     { name: "The Prince Charles Hospital", capacity: 50, applicants: 30, region: "SEQ" },
